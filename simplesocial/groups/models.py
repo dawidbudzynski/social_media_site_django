@@ -1,4 +1,4 @@
-from django.conf import settings
+# from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.text import slugify
@@ -15,7 +15,8 @@ class Group(models.Model):
     slug = models.SlugField(allow_unicode=True, unique=True)
     description = models.TextField(blank=True, default='')
     description_html = models.TextField(editable=False, default='', blank=True)
-    members = models.ManyToManyField(User,through="GroupMember")
+    members = models.ManyToManyField(User, through="GroupMember")
+    image = models.ImageField(upload_to='images/', null=True)
 
     def __str__(self):
         return self.name

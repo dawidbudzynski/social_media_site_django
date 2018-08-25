@@ -28,6 +28,7 @@
 			     <h3 class="title list-group-item-heading">{{ group.name }}</h3>
 			<div class="list-group-item-text container-fluid">
 				{{ group.description_html|safe }}
+                <img src="{{ group.image.url }}" style=width:500px;height:400px;>
 				<div class="row">
 					<div class="col-md-4">
 						<span class="badge">{{ group.members.count }}</span> member{{ group.members.count|pluralize }}
