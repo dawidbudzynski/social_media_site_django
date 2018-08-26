@@ -15,7 +15,7 @@ from .models import Group, GroupMember
 
 class CreateGroup(LoginRequiredMixin, View):
     def get(self, request):
-        form = CreateGroupForm().as_p()
+        form = CreateGroupForm()
         ctx = {'form': form}
 
         return render(request,
