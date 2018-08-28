@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.views import View
 from django.views import generic
+from django.contrib.auth.models import User, Group
 
 from . import models
 from .forms import CreateGroupForm
@@ -45,6 +46,19 @@ class SingleGroup(generic.DetailView):
 
 class ListGroups(generic.ListView):
     model = Group
+
+
+class ListUserGroups(generic.ListView):
+    model = Group
+    # for group in groups:
+    #     print(group.members)
+    # groups = User.groups
+    # for group in groups:
+    #     print(group.name)
+
+    # queryset = Group.objects.filter(members__user__username=User.username)
+    # print(queryset)
+    # template_name = 'groups/user_group_list.html'
 
 
 class JoinGroup(LoginRequiredMixin, generic.RedirectView):
