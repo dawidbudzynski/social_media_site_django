@@ -51,6 +51,7 @@ class PostDetail(SelectRelatedMixin, generic.DetailView):
 
 
 class CreatePost(LoginRequiredMixin, View):
+
     def get(self, request):
         form = PostForm()
         ctx = {'form': form}
@@ -74,7 +75,7 @@ class CreatePost(LoginRequiredMixin, View):
                                 message=message,
                                 user=user,
                                 image=image)
-            return HttpResponseRedirect(reverse('groups:all'))
+            return HttpResponseRedirect(reverse('groups:single', kwargs={"slug": group.slug}))
         return HttpResponseRedirect('/wrong_value')
 
 

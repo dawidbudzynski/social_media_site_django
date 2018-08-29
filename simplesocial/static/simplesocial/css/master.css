@@ -1,6 +1,9 @@
 #group-image {
     float: left;
-    margin: 10px;
     width: 150px;
     height: 150px;
+}
+
+.title-block {
+    margin: 10px 0 50px 0;
 }

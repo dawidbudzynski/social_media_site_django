@@ -3,13 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render
-from django.views import View
-from django.views import generic
+from django.shortcuts import render, get_object_or_404
+from django.views import generic, View
 from django.contrib.auth.models import User, Group
 
-from . import models
 from .forms import CreateGroupForm
 from .models import Group, GroupMember
 
@@ -50,15 +47,6 @@ class ListGroups(generic.ListView):
 
 class ListUserGroups(generic.ListView):
     model = Group
-    # for group in groups:
-    #     print(group.members)
-    # groups = User.groups
-    # for group in groups:
-    #     print(group.name)
-
-    # queryset = Group.objects.filter(members__user__username=User.username)
-    # print(queryset)
-    # template_name = 'groups/user_group_list.html'
 
 
 class JoinGroup(LoginRequiredMixin, generic.RedirectView):
@@ -71,10 +59,8 @@ class JoinGroup(LoginRequiredMixin, generic.RedirectView):
 
         try:
             GroupMember.objects.create(user=self.request.user, group=group)
-
         except IntegrityError:
             messages.warning(self.request, ("Warning, already a member of {}".format(group.name)))
-
         else:
             messages.success(self.request, "You are now a member of the {} group.".format(group.name))
 
@@ -89,13 +75,12 @@ class LeaveGroup(LoginRequiredMixin, generic.RedirectView):
     def get(self, request, *args, **kwargs):
 
         try:
-
-            membership = models.GroupMember.objects.filter(
+            membership = GroupMember.objects.filter(
                 user=self.request.user,
                 group__slug=self.kwargs.get("slug")
             ).get()
 
-        except models.GroupMember.DoesNotExist:
+        except GroupMember.DoesNotExist:
             messages.warning(
                 self.request,
                 "You can't leave this group because you aren't in it."
