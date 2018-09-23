@@ -1,26 +1,26 @@
-from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-from django.core.urlresolvers import reverse_lazy
-from django.http import Http404
-from django.views import generic
-
 from braces.views import SelectRelatedMixin
-
-from . import forms
-from . import models
-
+from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy, reverse
+from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import render
+from django.views import View, generic
+
+from .forms import PostForm
+from .models import Post
+
 User = get_user_model()
 
 
 class PostList(SelectRelatedMixin, generic.ListView):
-    model = models.Post
+    model = Post
     select_related = ("user", "group")
 
 
 class UserPosts(generic.ListView):
-    model = models.Post
+    model = Post
     template_name = "posts/user_post_list.html"
 
     def get_queryset(self):
@@ -40,7 +40,7 @@ class UserPosts(generic.ListView):
 
 
 class PostDetail(SelectRelatedMixin, generic.DetailView):
-    model = models.Post
+    model = Post
     select_related = ("user", "group")
 
     def get_queryset(self):
@@ -50,19 +50,37 @@ class PostDetail(SelectRelatedMixin, generic.DetailView):
         )
 
 
-class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
-    fields = ('message','group')
-    model = models.Post
+class CreatePost(LoginRequiredMixin, View):
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super().form_valid(form)
+    def get(self, request):
+        form = PostForm()
+        ctx = {'form': form}
+
+        return render(request,
+                      template_name='posts/create_post.html',
+                      context=ctx)
+
+    def post(self, request):
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            group = form.cleaned_data['group']
+            message = form.cleaned_data['message']
+            image = form.cleaned_data['image']
+            user = self.request.user
+
+            if Post.objects.filter(message=message).exists():
+                return HttpResponseRedirect('/object_already_exist')
+
+            Post.objects.create(group=group,
+                                message=message,
+                                user=user,
+                                image=image)
+            return HttpResponseRedirect(reverse('groups:single', kwargs={"slug": group.slug}))
+        return HttpResponseRedirect('/wrong_value')
 
 
 class DeletePost(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
-    model = models.Post
+    model = Post
     select_related = ("user", "group")
     success_url = reverse_lazy("posts:all")
 

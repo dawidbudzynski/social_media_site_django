@@ -1,12 +1,9 @@
-from django.conf import settings
+import misaka
+from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.db import models
-
-import misaka
-
 from groups.models import Group
 
-from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
@@ -15,7 +12,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     message = models.TextField()
     message_html = models.TextField(editable=False)
-    group = models.ForeignKey(Group, related_name="posts",null=True, blank=True)
+    group = models.ForeignKey(Group, related_name="posts", null=True, blank=True)
+    image = models.ImageField(upload_to='images/', null=True)
 
     def __str__(self):
         return self.message
@@ -26,10 +24,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            "posts:single",
+            "groups:single",
             kwargs={
-                "username": self.user.username,
-                "pk": self.pk
+                "slug": self.group.slug,
             }
         )
 
