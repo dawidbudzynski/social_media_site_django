@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'groups',
     'posts',
+    'tech_news'
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),
+                    ('tech_news', os.path.join(BASE_DIR, 'tech_news', 'static'))]
 
 LOGIN_REDIRECT_URL = "test"
 LOGOUT_REDIRECT_URL = "thanks"

@@ -29,6 +29,7 @@ urlpatterns = [
     url(r"^accounts/", include("django.contrib.auth.urls")),
     url(r"^posts/", include("posts.urls", namespace="posts")),
     url(r"^groups/", include("groups.urls", namespace="groups")),
+    url(r"^tech_news/", include("tech_news.urls", namespace="tech_news"))
 ]
 
 if settings.DEBUG:
