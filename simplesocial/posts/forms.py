@@ -1,16 +1,7 @@
-from django import forms
-from django.forms import (Form, CharField, ChoiceField, Textarea, ModelChoiceField, ImageField, ModelMultipleChoiceField,
-                          CheckboxSelectMultiple, Select,
-                          NullBooleanField)
-
-from posts import models
+from django.forms import (Form, CharField, Textarea, ModelChoiceField, ImageField, Select)
 from groups.models import Group
+from posts import models
 
-
-# class PostForm(forms.ModelForm):
-#     class Meta:
-#         fields = ("message", "group")
-#         model = models.Post
 
 class PostForm(Form):
     group = ModelChoiceField(queryset=Group.objects.all(), widget=Select)

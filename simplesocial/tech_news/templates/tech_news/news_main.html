@@ -1,35 +1,92 @@
 {% extends 'base.html' %}
+
+{% block javascript %}
+    <script>
+        var news_field = $("#news_field");
+        var news_source_title_field = $('#news_source_title_field');
+        var image_url_field = $('#image_url_field');
+        $(".ajax_button").click(function () {
+            var news_source = $(this).text();
+            $.ajax({
+                url: '{% url "tech_news:news-generate" %}',
+                data: {
+                    'news_source': news_source
+                },
+                dataType: 'json',
+                success: function (data) {
+                    news_field.empty();
+                    news_source_title_field.empty();
+                    image_url_field.empty();
+                    var news_source = data.news_source;
+                    var image_url = data.image_url;
+                    var all_news = data.articles;
+                    news_source_title_field.append('<h1 style="padding-right: 200px">' + news_source + '</h1>');
+                    image_url_field.append('<img src="' + image_url + '" alt="No image" style="width: 180px; height: 180px">');
+                    for (var i = 0; i < all_news.length; i++) {
+                        var single_news = '<tr>\n' +
+                            '                <td>\n' +
+                            '                    <h1>' + all_news[i].title + '</h1>\n' +
+                            '                </td>\n' +
+                            '                <td rowspan="2">\n' +
+                            '                    <img src=" ' + all_news[i].urlToImage + ' " alt="\'No image"\n' +
+                            '                         style=\'width:300px;height:200px;float:right; margin-right: 50px\'>\n' +
+                            '                </td>\n' +
+                            '            </tr>\n' +
+                            '            <tr>\n' +
+                            '                <td rowspan="2">\n' +
+                            '                    <h3>' + all_news[i].description + '</h3>\n' +
+                            '                </td>\n' +
+                            '            </tr>\n' +
+                            '            <tr>\n' +
+                            '                <td>\n' +
+                            '                    <a href=" ' + all_news[i].url + '" class="btn btn-dark btn-lg hvr-float-shadow"\n' +
+                            '                       style=\'float:right;width:300px; margin-right: 50px\'>Read news</a>\n' +
+                            '                </td>\n' +
+                            '            </tr>';
+                        news_field.append(single_news);
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
     <table class="table">
         <thead>
         <tr>
-            <td style='text-align: right' rowspan="2">
-                <img src="/static/tech_news/img/gaming.png" alt="No image ign" style="width: 180px; height: 180px">
+            <td id="image_url_field" style='text-align: right; width: 200px; height: 200px' rowspan="2">
+                <img src="/static/tech_news/img/gaming.png" alt="No image" style="width: 180px; height: 180px">
             </td>
             <td>
-                <h1 style="padding-right: 200px">GAMING AND TECH NEWS</h1>
+                <h1 style="padding-right: 200px">Tech News</h1>
             </td>
         </tr>
         <tr>
-            <td>
-                <h1 style="padding-right: 200px">Select your favorite tech news source</h1>
+            <td id="news_source_title_field">
+                <h1 style="padding-right: 200px">Select your favorite news source</h1>
             </td>
         </tr>
         <tr>
             <td style="text-align: center" colspan="2">
-                <a href="{% url 'tech_news:news-selected' news_source='polygon' %}"
-                   class="btn btn-dark hvr-float-shadow" role="button"
+                <a href="#"
+                   class="ajax_button btn btn-dark hvr-float-shadow" role="button"
                    style="width: 22%">Polygon</a>
-                <a href="{% url 'tech_news:news-selected' news_source='ign' %}" class="btn btn-dark hvr-float-shadow"
+                <a href="#"
+                   class="ajax_button btn btn-dark hvr-float-shadow"
                    role="button" style="width: 22%">IGN</a>
-                <a href="{% url 'tech_news:news-selected' news_source='theverge' %}"
-                   class="btn btn-dark hvr-float-shadow" role="button" style="width: 22%">The
-                    Verge</a>
-                <a href="{% url 'tech_news:news-selected' news_source='techradar' %}"
-                   class="btn btn-dark hvr-float-shadow" role="button"
+                <a href="#"
+                   class="ajax_button btn btn-dark hvr-float-shadow" role="button" style="width: 22%">The Verge</a>
+                <a href="#"
+                   class="ajax_button btn btn-dark hvr-float-shadow" role="button"
                    style="width: 22%">TechRadar</a>
             </td>
         </tr>
         </thead>
     </table>
+    <table class="table">
+        <tbody id="news_field">
+        </tbody>
+    </table>
+
 {% endblock %}

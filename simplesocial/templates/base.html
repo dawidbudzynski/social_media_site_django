@@ -3,7 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gaming Hub</title>
+    <title>Tech-Hub</title>
+    <link rel="icon" type="image/png" href="static/img/icon.png"/>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <!-- Latest compiled and minified CSS -->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -27,15 +29,14 @@
 <nav class="navbar  mynav" role="navigation" id="navbar">
     <div class="container">
 
-        <a class="navbar-brand mynav" href="{% url 'home' %}">Gaming Hub</a>
+        <a class="navbar-brand mynav" href="{% url 'test' %}">Tech-Hub</a>
 
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
                 <li><a href="{% url 'tech_news:news-main' %}" class="btn btn-simple">News</a></li>
                 <li><a href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li>
                 <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
-                <li><a href="{% url 'groups:user_groups' %}" class="btn btn-simple">My Groups</a></li>
-                <li><a href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a></li>
+                <li><a href="{% url 'test' %}" class="btn btn-simple">Logged user: {{ user.get_username }}</a></li>
                 <li><a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
             {% else %}
                 <li><a href="{% url 'tech_news:news-main' %}" class="btn btn-simple">News</a></li>
@@ -53,6 +54,7 @@
 
 <canvas id="canvas"></canvas>
 
+{% block javascript %}
+{% endblock %}
 </body>
-{#  <script src="{% static "simplesocial/js/master.js"%}" type="text/javascript" ></script>#}
 </html>
