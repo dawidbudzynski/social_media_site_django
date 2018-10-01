@@ -39,7 +39,7 @@
                             '            </tr>\n' +
                             '            <tr>\n' +
                             '                <td>\n' +
-                            '                    <a href=" ' + all_news[i].url + '" class="btn btn-dark btn-lg hvr-float-shadow"\n' +
+                            '                    <a href=" ' + all_news[i].url + '" class="btn btn-primary btn-lg hvr-float-shadow"\n' +
                             '                       style=\'float:right;width:300px; margin-right: 50px\'>Read news</a>\n' +
                             '                </td>\n' +
                             '            </tr>';
@@ -64,21 +64,21 @@
         </tr>
         <tr>
             <td id="news_source_title_field">
-                <h1 style="padding-right: 200px">Select your favorite news source</h1>
+                <h1 style="padding-right: 200px">Polygon</h1>
             </td>
         </tr>
         <tr>
             <td style="text-align: center" colspan="2">
                 <a href="#"
-                   class="ajax_button btn btn-dark hvr-float-shadow" role="button"
+                   class="ajax_button btn btn-primary" role="button"
                    style="width: 22%">Polygon</a>
                 <a href="#"
-                   class="ajax_button btn btn-dark hvr-float-shadow"
+                   class="ajax_button btn btn-primary"
                    role="button" style="width: 22%">IGN</a>
                 <a href="#"
-                   class="ajax_button btn btn-dark hvr-float-shadow" role="button" style="width: 22%">The Verge</a>
+                   class="ajax_button btn btn-primary" role="button" style="width: 22%">The Verge</a>
                 <a href="#"
-                   class="ajax_button btn btn-dark hvr-float-shadow" role="button"
+                   class="ajax_button btn btn-primary" role="button"
                    style="width: 22%">TechRadar</a>
             </td>
         </tr>
@@ -86,7 +86,28 @@
     </table>
     <table class="table">
         <tbody id="news_field">
+        {% for item in response %}
+            <tr>
+                <td>
+                    <h1>{{ item.title }}</h1>
+                </td>
+                <td rowspan="2">
+                    <img src="{{ item.urlToImage }}" alt="'No image"
+                         style='width:300px;height:200px;float:right; margin-right: 50px'>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2">
+                    <h3>{{ item.description }}</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{{ item.url }}" class="btn btn-primary btn-lg hvr-float-shadow"
+                       style='float:right;width:300px; margin-right: 50px'>Read news</a>
+                </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
-
 {% endblock %}

@@ -1,27 +1,31 @@
-<div class="post media">
-    <h3>{{ post.message_html|safe }}</h3>
-    {% if post.image %}
-    <div class="row">
-        <div class="col-md-4" id="group-image">
-            <img src="{{ post.image.url }}" style="width: 100%; height: 100%">
+<div>
+    <div>
+        {% if post.image %}
+            <div class="post_image">
+                <img src="{{ post.image.url }}">
+            </div>
+        {% endif %}
+        <div class="post_message">
+            <h3>{{ post.message_html|safe }}</h3>
         </div>
     </div>
-    {% endif %}
-    <div class="media-body">
-        <h5 class="media-heading">
+    <div>
+        <div class="footer_button">
+            {% if user.is_authenticated and post.user == user and not hide_delete %}
+                <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+                    <span class="icon-label">Delete</span>
+                </a>
+            {% endif %}
+        </div>
+        <div class="footer_content">
+            <h5>
             <span class="username"><a
                     href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></span>
-            <time class="time"><a
-                    href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a>
-            </time>
-        </h5>
-        <div class="media-footer">
-            {% if user.is_authenticated and post.user == user and not hide_delete %}
-            <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-simple">
-                <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
-                <span class="text-danger icon-label">Delete</span>
-            </a>
-            {% endif %}
+                <time class="time"><a
+                        href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a>
+                </time>
+            </h5>
         </div>
     </div>
 </div>

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'social_django',
-    'bootstrap3',
+    'bootstrap4',
     'accounts',
     'groups',
     'posts',
@@ -150,5 +150,5 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),
                     ('tech_news', os.path.join(BASE_DIR, 'tech_news', 'static'))]
 
-LOGIN_REDIRECT_URL = "test"
+LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "thanks"

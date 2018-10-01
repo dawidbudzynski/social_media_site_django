@@ -1,6 +1,4 @@
-from django.forms import (Form, CharField, ChoiceField, Textarea, ModelChoiceField, ImageField, ModelMultipleChoiceField,
-                          CheckboxSelectMultiple, Select,
-                          NullBooleanField)
+from django.forms import (Form, CharField, Textarea, ImageField)
 
 
 class CreateGroupForm(Form):

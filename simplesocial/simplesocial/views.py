@@ -1,6 +1,7 @@
 import random
 
 import requests
+from constants import NEWS_SOURCE_DATA_ALL
 from decouple import config
 from django.shortcuts import render
 from django.views import View
@@ -11,28 +12,7 @@ api_key = config('API_KEY')
 
 class WelcomeView(View):
     def get(self, request):
-        news_source_data_all = {
-            'IGN': {
-                'name': 'IGN',
-                'api_name': 'ign',
-                'image_url': '/static/tech_news/img/IGN.jpg'
-            },
-            'Polygon': {
-                'name': 'Polygon',
-                'api_name': 'polygon',
-                'image_url': '/static/tech_news/img/polygon.png'
-            },
-            'TechRadar': {
-                'name': 'TechRadar',
-                'api_name': 'techradar',
-                'image_url': '/static/tech_news/img/techradar.png'
-            },
-            'The Verge': {
-                'name': 'The Verge',
-                'api_name': 'the-verge',
-                'image_url': '/static/tech_news/img/verge.png'
-            },
-        }
+        news_source_data_all = dict(NEWS_SOURCE_DATA_ALL)
         news_source = news_source_data_all.popitem()[1]
         url = ('https://newsapi.org/v2/top-headlines?sources={}&apiKey={}'.format(news_source['api_name'], api_key))
         response = requests.get(url)

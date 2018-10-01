@@ -1,12 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container">
-        {% if user.is_authenticated %}
-            <h1>Welcome {{ user.get_username }}!</h1>
-        {% else %}
-            <h1>Welcome to Tech-Hub!</h1>
-        {% endif %}
-        <h1>News of the day</h1>
+        <table class="table">
+            <tr>
+                <td>
+                    {% if user.is_authenticated %}
+                        <h1>Welcome {{ user.get_username }}!</h1>
+                    {% else %}
+                        <h1>Welcome to Tech-Hub!</h1>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h1>News of the day</h1>
+                </td>
+            </tr>
+        </table>
         <table class="table">
             <tr>
                 <td>
@@ -24,7 +34,7 @@
             </tr>
             <tr>
                 <td>
-                    <a href="{{ response.url }}" class="btn btn-dark btn-lg hvr-float-shadow"
+                    <a href="{{ response.url }}" class="btn btn-primary btn-lg"
                        style='float:right;width:300px; margin-right: 50px'>Read news</a>
                 </td>
             </tr>

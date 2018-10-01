@@ -2,23 +2,17 @@
 {% load staticfiles %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>Tech-Hub</title>
-    <link rel="icon" type="image/png" href="static/img/icon.png"/>
+    <link rel="icon" type="image/png" href="{% static 'img/icon.png' %}"/>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -26,33 +20,50 @@
 </head>
 <body>
 
-<nav class="navbar  mynav" role="navigation" id="navbar">
-    <div class="container">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand mynav" href="{% url 'home' %}"><h2>Tech-Hub</h2></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'tech_news:news-main' %}"
+                                            class="nav-link btn btn-primary">News</a></li>
+                    <li class="nav-item"><a href="{% url 'posts:create' %}"
+                                            class="nav-link btn btn-primary">Post</a></li>
+                    <li class="nav-item"><a href="{% url 'groups:all' %}"
+                                            class="nav-link btn btn-primary">Groups</a></li>
+                    <li class="nav-item"><a href="{% url 'accounts:user_details' %}"
+                                            class="nav-link btn btn-primary">User: {{ user.get_username }}</a></li>
+                    <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link btn btn-primary">Log
+                        out</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{% url 'tech_news:news-main' %}"
+                                            class="nav-link btn btn-primary">News</a></li>
+                    <li class="nav-item"><a href="{% url 'groups:all' %}"
+                                            class="nav-link btn btn-primary">Groups</a></li>
+                    <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link btn btn-primary">Log
+                        in</a></li>
+                    <li class="nav-item"><a href="{% url 'accounts:signup' %}" class="nav-link btn btn-primary">Sign
+                        up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>
 
-        <a class="navbar-brand mynav" href="{% url 'test' %}">Tech-Hub</a>
-
-        <ul class="nav navbar-nav navbar-right">
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'tech_news:news-main' %}" class="btn btn-simple">News</a></li>
-                <li><a href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li>
-                <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
-                <li><a href="{% url 'test' %}" class="btn btn-simple">Logged user: {{ user.get_username }}</a></li>
-                <li><a href="{% url 'accounts:logout' %}" class="btn btn-simple">Log out</a></li>
-            {% else %}
-                <li><a href="{% url 'tech_news:news-main' %}" class="btn btn-simple">News</a></li>
-                <li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
-                <li><a href="{% url 'accounts:login' %}" class="btn btn-simple">Log in</a></li>
-                <li><a href="{% url 'accounts:signup' %}" class="btn btn-simple">Sign up</a></li>
-            {% endif %}
-        </ul>
-    </div>
-</nav>
 <div class="container mycontent">
     {% block content %}
     {% endblock %}
 </div>
 
-<canvas id="canvas"></canvas>
+<!-- Optional JavaScript -->
+<!-- Popper.js, then Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 {% block javascript %}
 {% endblock %}

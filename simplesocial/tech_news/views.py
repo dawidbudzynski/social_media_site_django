@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
 
+from constants import NEWS_SOURCE_DATA_ALL
+
 api_key = config('API_KEY')
 
 
@@ -11,37 +13,23 @@ api_key = config('API_KEY')
 
 class NewsMainPage(View):
     def get(self, request):
+        default_news_source = NEWS_SOURCE_DATA_ALL['Polygon']
+        url = ('https://newsapi.org/v2/top-headlines?sources={}&apiKey={}'.format(default_news_source['api_name'],
+                                                                                  api_key))
+        response = requests.get(url)
+        ctx = {
+            'response': response.json()['articles'],
+        }
         return render(request,
-                      template_name='tech_news/news_main.html')
+                      template_name='tech_news/news_main.html',
+                      context=ctx)
 
 
 def news_generate(request):
     news_source = request.GET.get('news_source', None)
 
-    news_source_data_all = {
-        'IGN': {
-            'name': 'IGN',
-            'api_name': 'ign',
-            'image_url': '/static/tech_news/img/IGN.jpg'
-        },
-        'Polygon': {
-            'name': 'Polygon',
-            'api_name': 'polygon',
-            'image_url': '/static/tech_news/img/polygon.png'
-        },
-        'TechRadar': {
-            'name': 'TechRadar',
-            'api_name': 'techradar',
-            'image_url': '/static/tech_news/img/techradar.png'
-        },
-        'The Verge': {
-            'name': 'The Verge',
-            'api_name': 'the-verge',
-            'image_url': '/static/tech_news/img/verge.png'
-        },
-    }
     news_source_data_single = {}
-    for news_source_key, news_source_values in news_source_data_all.items():
+    for news_source_key, news_source_values in NEWS_SOURCE_DATA_ALL.items():
         if news_source == news_source_key:
             news_source_data_single = news_source_values
 
