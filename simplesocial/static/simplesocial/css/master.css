@@ -1,7 +1,14 @@
 body {
-    margin-top: 40px;
     font-family: 'Righteous', serif;
     background-color: whitesmoke;
+}
+
+.mycontent {
+    margin-top: 100px;
+}
+
+.navbar {
+    background-color: rgb(178, 192, 221);
 }
 
 .table {
@@ -70,4 +77,10 @@ img {
 
 #delete_post_content {
     width: 100%;
+}
+
+#group-image {
+    height: 150px;
+    width: 150px;
+    margin: auto;
 }
