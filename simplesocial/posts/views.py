@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.views import View, generic
+from groups.models import Group
 
 from .forms import PostForm
 from .models import Post
@@ -52,8 +53,12 @@ class PostDetail(SelectRelatedMixin, generic.DetailView):
 
 class CreatePost(LoginRequiredMixin, View):
 
-    def get(self, request):
-        form = PostForm()
+    def get(self, request, slug=None):
+        if slug:
+            group = Group.objects.get(slug=slug)
+            form = PostForm(initial={'group': group})
+        else:
+            form = PostForm()
         ctx = {'form': form}
 
         return render(request,

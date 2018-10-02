@@ -9,6 +9,8 @@ urlpatterns = [
         name="all"),
     url(r"new/$", views.CreatePost.as_view(),
         name="create"),
+    url(r"new/(?P<slug>[-\w]+)/$", views.CreatePost.as_view(),
+        name="create"),
     url(r"by/(?P<username>[-\w]+)/$", views.UserPosts.as_view(),
         name="for_user"),
     url(r"by/(?P<username>[-\w]+)/(?P<pk>\d+)/$", views.PostDetail.as_view(),

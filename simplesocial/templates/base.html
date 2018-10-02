@@ -21,30 +21,34 @@
 <body>
 
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
         <a class="navbar-brand mynav" href="{% url 'home' %}"><h2>Tech-Hub</h2></a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'tech_news:news-main' %}"
-                                            class="nav-link btn btn-primary">News</a></li>
-                    <li class="nav-item"><a href="{% url 'posts:create' %}"
-                                            class="nav-link btn btn-primary">Post</a></li>
-                    <li class="nav-item"><a href="{% url 'groups:all' %}"
-                                            class="nav-link btn btn-primary">Groups</a></li>
-                    <li class="nav-item"><a href="{% url 'accounts:user_details' %}"
-                                            class="nav-link btn btn-primary">User: {{ user.get_username }}</a></li>
-                    <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link btn btn-primary">Log
-                        out</a></li>
+                <li class="nav-item"><a href="{% url 'tech_news:news-main' %}"
+                                        class="nav-link btn btn-primary">News</a></li>
+                <li class="nav-item"><a href="{% url 'posts:create' %}"
+                                        class="nav-link btn btn-primary">Post</a></li>
+                <li class="nav-item"><a href="{% url 'groups:all' %}"
+                                        class="nav-link btn btn-primary">Groups</a></li>
+                <li class="nav-item"><a href="{% url 'accounts:user_details' %}"
+                                        class="nav-link btn btn-primary">User: {{ user.get_username }}</a></li>
+                <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link btn btn-primary">Log
+                    out</a></li>
                 {% else %}
-                    <li class="nav-item"><a href="{% url 'tech_news:news-main' %}"
-                                            class="nav-link btn btn-primary">News</a></li>
-                    <li class="nav-item"><a href="{% url 'groups:all' %}"
-                                            class="nav-link btn btn-primary">Groups</a></li>
-                    <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link btn btn-primary">Log
-                        in</a></li>
-                    <li class="nav-item"><a href="{% url 'accounts:signup' %}" class="nav-link btn btn-primary">Sign
-                        up</a></li>
+                <li class="nav-item"><a href="{% url 'tech_news:news-main' %}"
+                                        class="nav-link btn btn-primary">News</a></li>
+                <li class="nav-item"><a href="{% url 'groups:all' %}"
+                                        class="nav-link btn btn-primary">Groups</a></li>
+                <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link btn btn-primary">Log
+                    in</a></li>
+                <li class="nav-item"><a href="{% url 'accounts:signup' %}" class="nav-link btn btn-primary">Sign
+                    up</a></li>
                 {% endif %}
             </ul>
         </div>
