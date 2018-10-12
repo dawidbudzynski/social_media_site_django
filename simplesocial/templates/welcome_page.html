@@ -1,46 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-    <table class="table">
-        <tr>
-            <td id="image_url_field" style='text-align: right; width: 200px; height: 200px' rowspan="2">
-                <img src="/static/tech_news/img/gaming.png" alt="No image" style="width: 180px; height: 180px">
-            </td>
-            <td>
-                {% if user.is_authenticated %}
-                <h1>Welcome {{ user.get_username }}!</h1>
-                {% else %}
-                <h1>Welcome to Tech-Hub!</h1>
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h1>News of the day</h1>
-            </td>
-        </tr>
-    </table>
-    <table class="table">
-        <tr>
-            <td>
-                <h1>{{ response.title }}</h1>
-            </td>
-            <td rowspan="2">
-                <img src="{{ response.urlToImage }}" alt="'No image"
-                     style='width:300px;height:200px;float:right; margin-right: 50px'>
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2">
-                <h3>{{ response.description }}</h3>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="{{ response.url }}" class="btn btn-primary btn-lg"
-                   style='float:right;width:300px; margin-right: 50px'>Read news</a>
-            </td>
-        </tr>
-    </table>
-</div>
+    <div class="card card-main">
+        <div class="card-body">
+            <img class="news-img" src="/static/tech_news/img/gaming.png" alt="'No image"
+                 style='float:left'>
+            {% if user.is_authenticated %}
+                <h1 class="card-text">Welcome {{ user.get_username }}!</h1>
+            {% else %}
+                <h1 class="card-text">Welcome to Tech-Hub!</h1>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <h1 class="card-text">News of the day</h1>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header">{{ response.title }}</h5>
+        <div class="card-body">
+            <img class="news-img" src="{{ response.urlToImage }}" alt="'No image">
+            <p class="card-text card-description">{{ response.description }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            <a href="{{ response.url }}" class="btn btn-primary btn-block hvr-float-shadow">Read news</a>
+        </div>
+    </div>
 {% endblock %}

@@ -3,8 +3,7 @@
 {% block javascript %}
     <script>
         var news_field = $("#news_field");
-        var news_source_title_field = $('#news_source_title_field');
-        var image_url_field = $('#image_url_field');
+        var title_card = $("#title-card");
         $(".ajax_button").click(function () {
             var news_source = $(this).text();
             $.ajax({
@@ -15,34 +14,24 @@
                 dataType: 'json',
                 success: function (data) {
                     news_field.empty();
-                    news_source_title_field.empty();
-                    image_url_field.empty();
+                    title_card.empty();
                     var news_source = data.news_source;
                     var image_url = data.image_url;
                     var all_news = data.articles;
-                    news_source_title_field.append('<h1 style="padding-right: 200px">' + news_source + '</h1>');
-                    image_url_field.append('<img src="' + image_url + '" alt="No image" style="width: 180px; height: 180px">');
+                    title_card.append('<img id="image_url_field" class="news-img" src="'
+                        + image_url + '"alt="\'No image" style=\'float:left\'>\n' +
+                        '            <h1 class="card-text">Tech News</h1>\n' +
+                        '            <h1 id="news_source_title_field" class="card-text">'
+                        + news_source + '</h1>');
                     for (var i = 0; i < all_news.length; i++) {
-                        var single_news = '<tr>\n' +
-                            '                <td>\n' +
-                            '                    <h1>' + all_news[i].title + '</h1>\n' +
-                            '                </td>\n' +
-                            '                <td rowspan="2">\n' +
-                            '                    <img src=" ' + all_news[i].urlToImage + ' " alt="\'No image"\n' +
-                            '                         style=\'width:300px;height:200px;float:right; margin-right: 50px\'>\n' +
-                            '                </td>\n' +
-                            '            </tr>\n' +
-                            '            <tr>\n' +
-                            '                <td rowspan="2">\n' +
-                            '                    <h3>' + all_news[i].description + '</h3>\n' +
-                            '                </td>\n' +
-                            '            </tr>\n' +
-                            '            <tr>\n' +
-                            '                <td>\n' +
-                            '                    <a href=" ' + all_news[i].url + '" class="btn btn-primary btn-lg hvr-float-shadow"\n' +
-                            '                       style=\'float:right;width:300px; margin-right: 50px\'>Read news</a>\n' +
-                            '                </td>\n' +
-                            '            </tr>';
+                        var single_news = '<h5 class="card-header">' + all_news[i].title + '</h5>\n' +
+                            '            <div class="card-body">\n' +
+                            '                <img class="news-img" src="' + all_news[i].urlToImage + '" alt="\'No image">\n' +
+                            '                <p class="card-text card-description">' + all_news[i].description + '</p>\n' +
+                            '            </div>\n' +
+                            '            <div class="card-footer text-muted">\n' +
+                            '                <a href="' + all_news[i].description +
+                            '" class="btn btn-primary btn-block hvr-float-shadow">Read news</a>\n</div>';
                         news_field.append(single_news);
                     }
                 }
@@ -52,62 +41,37 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table">
-        <thead>
-        <tr>
-            <td id="image_url_field" style='text-align: right; width: 200px; height: 200px' rowspan="2">
-                <img src="/static/tech_news/img/polygon.png" alt="No image" style="width: 180px; height: 180px">
-            </td>
-            <td>
-                <h1 style="padding-right: 200px">Tech News</h1>
-            </td>
-        </tr>
-        <tr>
-            <td id="news_source_title_field">
-                <h1 style="padding-right: 200px">Polygon</h1>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: center" colspan="2">
-                <a href="#"
-                   class="ajax_button btn btn-primary" role="button"
-                   style="width: 22%">Polygon</a>
-                <a href="#"
-                   class="ajax_button btn btn-primary"
-                   role="button" style="width: 22%">IGN</a>
-                <a href="#"
-                   class="ajax_button btn btn-primary" role="button" style="width: 22%">The Verge</a>
-                <a href="#"
-                   class="ajax_button btn btn-primary" role="button"
-                   style="width: 22%">TechRadar</a>
-            </td>
-        </tr>
-        </thead>
-    </table>
-    <table class="table">
-        <tbody id="news_field">
-        {% for item in response %}
-            <tr>
-                <td>
-                    <h1>{{ item.title }}</h1>
-                </td>
-                <td rowspan="2">
-                    <img src="{{ item.urlToImage }}" alt="'No image"
-                         style='width:300px;height:200px;float:right; margin-right: 50px'>
-                </td>
-            </tr>
-            <tr>
-                <td rowspan="2">
-                    <h3>{{ item.description }}</h3>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="{{ item.url }}" class="btn btn-primary btn-lg hvr-float-shadow"
-                       style='float:right;width:300px; margin-right: 50px'>Read news</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="card card-main">
+        <div id="title-card" class="card-body">
+            <img id="image_url_field" class="news-img" src="/static/tech_news/img/polygon.png" alt="'No image"
+                 style='float:left'>
+            <h1 class="card-text">Tech News</h1>
+            <h1 id="news_source_title_field" class="card-text">Polygon</h1>
+        </div>
+        <div class="card-footer">
+            <a href="#"
+               class="ajax_button btn btn-primary" role="button"
+               style="width: 22%">Polygon</a>
+            <a href="#"
+               class="ajax_button btn btn-primary"
+               role="button" style="width: 22%">IGN</a>
+            <a href="#"
+               class="ajax_button btn btn-primary" role="button" style="width: 22%">The Verge</a>
+            <a href="#"
+               class="ajax_button btn btn-primary" role="button"
+               style="width: 22%">TechRadar</a>
+        </div>
+    </div>
+    {% for item in response %}
+        <div id="news_field" class="card">
+            <h5 class="card-header">{{ item.title }}</h5>
+            <div class="card-body">
+                <img class="news-img" src="{{ item.urlToImage }}" alt="'No image">
+                <p class="card-text card-description">{{ item.description }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                <a href="{{ item.url }}" class="btn btn-primary btn-block hvr-float-shadow">Read news</a>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

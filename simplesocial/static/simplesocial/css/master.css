@@ -42,9 +42,9 @@ img {
     margin: 0 5px 0 5px;
 }
 
-nav .navbar-nav li a{
-  color: white !important;
-  }
+nav .navbar-nav li a {
+    color: white !important;
+}
 
 .posts {
     width: 100%;
@@ -83,4 +83,28 @@ img {
     height: 150px;
     width: 150px;
     margin: auto;
+}
+
+.card-main {
+    border: 2px solid blue;
+    border-radius: 20px;
+}
+
+.card-description {
+    text-align: left;
+    font-size: 20px;
+}
+
+.card {
+    margin-bottom: 10px;
+}
+
+.card-footer{
+    text-align: center;
+}
+
+.news-img{
+    height: 200px;
+    width: 250px;
+    float: right;
 }
