@@ -1,24 +1,20 @@
 {% extends 'groups/group_base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-    <table class="table table-dark">
-        <thead>
-        <tr>
-            <td colspan="3">
-                <h1>Create A New Group</h1>
-            </td>
-        </tr>
-        </thead>
-    </table>
-    <table class="table table-dark">
-        <tr>
-            <td>
-                <form action="{% url 'groups:create' %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-  	                {% bootstrap_form form %}
-                    <input type="submit" value="Create" class="btn btn-primary btn-lg btn-block">
-                </form>
-            </td>
-        </tr>
-    </table>
+    <div class="card">
+        <div class="card-body">
+            <img class="news-img" src="/static/tech_news/img/gaming.png" alt="'No image"
+                 style='float:left'>
+            <h1>Create A New Group</h1>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form action="{% url 'groups:create' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <input type="submit" value="Create" class="btn btn-primary btn-lg btn-block">
+            </form>
+        </div>
+    </div>
 {% endblock %}
