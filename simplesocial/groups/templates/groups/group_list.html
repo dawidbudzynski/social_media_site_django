@@ -1,9 +1,10 @@
 {% extends "groups/group_base.html" %}
+{% load staticfiles %}
 
 {% block pregroup %}
     <div class="card">
         <div class="card-body">
-            <img class="news-img" src="/static/tech_news/img/gaming.png" alt="'No image"
+            <img class="news-img" src="{%  static 'img/logo.png' %}" alt="'No image"
                  style='float:left'>
             <h1 class="card-text">Welcome to the Groups Page!</h1>
             <h1 class="card-text">Select a Group with a shared interest!</h1>
@@ -20,9 +21,15 @@
         <div id="news_field" class="card">
             <h5 class="card-header">{{ group.name }}</h5>
             <div class="card-body">
-                <img class="news-img" src="{{ group.image.url }}" alt="'No image">
-                <p class="card-text card-description">{{ group.description_html|safe }}</p>
-                <p><span class="badge">{{ group.posts.count }}</span> post{{ group.posts.count|pluralize }}</p>
+                {% if group.image %}
+                    <img class="news-img" src="{{ group.image.url }}" alt="'No image">
+                {% else %}
+                    <img class="news-img" src="{%  static 'img/logo.png' %}" alt="'No image">
+                {% endif %}
+                <h4 class="card-text card-description">{{ group.description_html|safe }}</h4>
+                <div id="post-counter">
+                    <p><span class="badge">{{ group.posts.count }}</span> post{{ group.posts.count|pluralize }}</p>
+                </div>
             </div>
             <div class="card-footer text-muted">
                 <a href="{% url 'groups:single' slug=group.slug %}"

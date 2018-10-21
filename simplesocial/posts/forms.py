@@ -6,7 +6,7 @@ from posts import models
 class PostForm(Form):
     group = ModelChoiceField(queryset=Group.objects.all(), widget=Select)
     message = CharField(widget=Textarea, required=False)
-    image = ImageField()
+    image = ImageField(required=False)
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user", None)

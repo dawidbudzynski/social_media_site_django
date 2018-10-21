@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
     <div class="card">
         <div class="card-body">
-            <img class="news-img" src="/static/tech_news/img/gaming.png" alt="'No image"
+            <img class="news-img" src="{%  static 'img/logo.png' %} " alt="'No image"
                  style='float:left'>
             {% if user.is_authenticated %}
                 <h1 class="card-text">Welcome {{ user.get_username }}!</h1>

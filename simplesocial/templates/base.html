@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Tech-Hub</title>
-    <link rel="icon" type="image/png" href="{% static 'img/icon.png' %}"/>
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}"/>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
     <!-- Bootstrap CSS -->
@@ -16,14 +16,15 @@
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'simplesocial/css/master.css' %}">
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
 </head>
 <body>
 
 <div class="container">
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand mynav" href="{% url 'home' %}"><h2>Tech-Hub</h2></a>
+            <a class="navbar-brand mynav" href="{% url 'home' %}">
+                <img class="logo-img" src="{% static 'img/logo_top.png' %} " alt="'No image" style='float:left'></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
                     aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
