@@ -18,15 +18,14 @@ Project is created using:
 * AJAX
 
 ## Setup
-Rename settings.ini.example to settings.ini and generate your API keys
-
-To run this project, install required libraries using pip:
-
+To run this project:
+1. Create PostgreSQL database
+2. Rename settings.ini.example to settings.ini and fill required fields. 
+3. Install required libraries using pip:
 ```
 $ pip install -r requirements.txt
 ```
-
-To run your local server use command: 
+4.To run your local server use command: 
 ```
 $ python manage.py runserver
 ```
