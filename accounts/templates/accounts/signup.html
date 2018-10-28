@@ -1,14 +1,25 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
+{% load staticfiles %}
 
 
 {% block content %}
-    <div class="container">
-        <h1>Sign Up</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <input type="submit" value="Sign Up" class="btn btn-primary btn-lg btn-block">
-        </form>
+    <div class="card">
+        <div class="card-body">
+            <img class="news-img" src="{% static 'img/logo.png' %} " alt="'No image">
+            <h1>Welcome to Tech-Hub!</h1>
+        </div>
+        <div class="card-footer text-muted">
+            <h3 class="card-footer-text">Sign Up</h3>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <<input type="submit" value="Sign Up" class="btn btn-primary btn-lg btn-block">
+            </form>
+        </div>
     </div>
 {% endblock %}

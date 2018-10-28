@@ -3,15 +3,15 @@
 {% block content %}
     <div class="card">
         <div class="card-body">
-            <img class="news-img" src="{%  static 'img/logo.png' %} " alt="'No image"
-                 style='float:left'>
+            <img class="news-img" src="{% static 'img/logo.png' %} " alt="'No image">
             {% if user.is_authenticated %}
                 <h1 class="card-text">Welcome {{ user.get_username }}!</h1>
-                <h1 class="card-text">News of the day</h1>
             {% else %}
                 <h1 class="card-text">Welcome to Tech-Hub!</h1>
-                <h1 class="card-text">News of the day</h1>
             {% endif %}
+        </div>
+        <div class="card-footer text-muted">
+            <h3 class="card-footer-text">News of the day</h3>
         </div>
     </div>
     <div class="card">
