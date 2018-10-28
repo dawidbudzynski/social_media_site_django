@@ -1,8 +1,8 @@
 NEWS_SOURCE_DATA_ALL = {
-    'IGN': {
-        'name': 'IGN',
-        'api_name': 'ign',
-        'image_url': '/static/tech_news/img/IGN.jpg'
+    'Wired': {
+        'name': 'Wired',
+        'api_name': 'wired',
+        'image_url': '/static/tech_news/img/wired.png'
     },
     'Polygon': {
         'name': 'Polygon',
