@@ -30,6 +30,3 @@ urlpatterns = [
     url(r"^groups/", include("groups.urls", namespace="groups")),
     url(r"^tech_news/", include("tech_news.urls", namespace="tech_news"))
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
