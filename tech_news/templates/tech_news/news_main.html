@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block javascript %}
+    <script>
+        var news_field = $("#news_field");
+        var title_card = $("#title-card");
+        $(".ajax_button").click(function () {
+            var news_source = $(this).text();
+            $.ajax({
+                url: '{% url "tech_news:news-generate" %}',
+                data: {
+                    'news_source': news_source
+                },
+                dataType: 'json',
+                success: function (data) {
+                    news_field.empty();
+                    title_card.empty();
+                    var news_source = data.news_source;
+                    var image_url = data.image_url;
+                    var all_news = data.articles;
+                    title_card.append('<img id="image_url_field" class="news-img" src="'
+                        + image_url + '"alt="\'No image" style=\'float:left\'>\n' +
+                        '            <h1 class="card-text">Tech News</h1>\n' +
+                        '            <h1 id="news_source_title_field" class="card-text">'
+                        + news_source + '</h1>');
+                    for (var i = 0; i < all_news.length; i++) {
+                        var single_news = '<h5 class="card-header">' + all_news[i].title + '</h5>\n' +
+                            '            <div class="card-body">\n' +
+                            '                <img class="news-img" src="' + all_news[i].urlToImage + '" alt="\'No image">\n' +
+                            '                <p class="card-text card-description">' + all_news[i].description + '</p>\n' +
+                            '            </div>\n' +
+                            '            <div class="card-footer text-muted">\n' +
+                            '                <a href="' + all_news[i].description +
+                            '" class="btn btn-primary btn-block hvr-float-shadow">Read news</a>\n</div>';
+                        news_field.append(single_news);
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div id="title-card" class="card-body">
+            <img id="image_url_field" class="news-img" src="/static/tech_news/img/polygon.png" alt="'No image"
+                 style='float:left'>
+            <h1 class="card-text">Tech News</h1>
+            <h1 id="news_source_title_field" class="card-text">Polygon</h1>
+        </div>
+        <div class="card-footer">
+            <a href="#"
+               class="ajax_button btn btn-primary" role="button"
+               style="width: 22%">Polygon</a>
+            <a href="#"
+               class="ajax_button btn btn-primary"
+               role="button" style="width: 22%">IGN</a>
+            <a href="#"
+               class="ajax_button btn btn-primary" role="button" style="width: 22%">The Verge</a>
+            <a href="#"
+               class="ajax_button btn btn-primary" role="button"
+               style="width: 22%">TechRadar</a>
+        </div>
+    </div>
+    {% for item in response %}
+        <div id="news_field" class="card">
+            <h5 class="card-header">{{ item.title }}</h5>
+            <div class="card-body">
+                <img class="news-img" src="{{ item.urlToImage }}" alt="'No image">
+                <p class="card-text card-description">{{ item.description }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                <a href="{{ item.url }}" class="btn btn-primary btn-block hvr-float-shadow">Read news</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

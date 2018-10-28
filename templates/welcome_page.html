@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <img class="news-img" src="{%  static 'img/logo.png' %} " alt="'No image"
+                 style='float:left'>
+            {% if user.is_authenticated %}
+                <h1 class="card-text">Welcome {{ user.get_username }}!</h1>
+                <h1 class="card-text">News of the day</h1>
+            {% else %}
+                <h1 class="card-text">Welcome to Tech-Hub!</h1>
+                <h1 class="card-text">News of the day</h1>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header">{{ response.title }}</h5>
+        <div class="card-body">
+            <img class="news-img" src="{{ response.urlToImage }}" alt="'No image">
+            <p class="card-text card-description">{{ response.description }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            <a href="{{ response.url }}" class="btn btn-primary btn-block hvr-float-shadow">Read news</a>
+        </div>
+    </div>
+{% endblock %}
