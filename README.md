@@ -28,6 +28,5 @@ $ pip install -r requirements.txt
 
 To run your local server use command: 
 ```
-$ cd simplesocial
 $ python manage.py runserver
 ```
