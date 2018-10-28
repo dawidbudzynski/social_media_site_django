@@ -17,6 +17,10 @@ body {
     border-color: #9b9acc;
 }
 
+.btn-primary:hover {
+    background-color: #13109a;
+}
+
 .navbar {
     background-color: rgb(20, 101, 255);
 }
@@ -109,6 +113,7 @@ img {
     width: 250px;
     float: left;
     border: 1px solid #9b9acc;
+    margin-right: 10px;
 }
 
 .news-img-content {

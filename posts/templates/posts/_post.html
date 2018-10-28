@@ -4,7 +4,7 @@
         {% if post.image %}
             <img class="news-img" src="{{ post.image.url }}" alt="'No image">
         {% else %}
-            <img class="news-img" src="{%  static 'img/logo.png' %}" alt="'No image">
+            <img class="news-img" src="{% static 'img/logo.png' %}" alt="'No image">
         {% endif %}
         <div id="post-text">
             <p class="card-text card-description">{{ post.message_html|safe }}</p>
@@ -19,43 +19,11 @@
             </h5>
         </div>
     </div>
-    <div class="card-footer text-muted">
-        {% if user.is_authenticated and post.user == user and not hide_delete %}
-            <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-danger btn-block">
+    {% if user.is_authenticated and post.user == user and not hide_delete %}
+        <div class="card-footer text-muted">
+            <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-primary btn-block">
                 Delete
             </a>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
 </div>
-
-{#<div>#}
-{#    <div>#}
-{#        {% if post.image %}#}
-{#            <div class="post_image">#}
-{#                <img src="">#}
-{#            </div>#}
-{#        #}
-{#        <div class="post_message">#}
-{#            <h3>{{ post.message_html|safe }}</h3>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div>#}
-{#        <div class="footer_button">#}
-{#            {% if user.is_authenticated and post.user == user and not hide_delete %}#}
-{#                <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-danger">#}
-{#                    <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>#}
-{#                    <span class="icon-label">Delete</span>#}
-{#                </a>#}
-{#            {% endif %}#}
-{#        </div>#}
-{#        <div class="footer_content">#}
-{#            <h5>#}
-{#            <span class="username"><a#}
-{#                    href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></span>#}
-{#                <time class="time"><a#}
-{#                        href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a>#}
-{#                </time>#}
-{#            </h5>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}

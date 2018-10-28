@@ -12,7 +12,7 @@ API_KEY_NEWS = config('API_KEY_NEWS', cast=str)
 
 class NewsMainPage(View):
     def get(self, request):
-        default_news_source = NEWS_SOURCE_DATA_ALL['Polygon']
+        default_news_source = NEWS_SOURCE_DATA_ALL['Wired']
         url = ('https://newsapi.org/v2/top-headlines?sources={}&apiKey={}'.format(
             default_news_source['api_name'],
             API_KEY_NEWS))
