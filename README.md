@@ -30,3 +30,6 @@ To run your local server use command:
 ```
 $ python manage.py runserver
 ```
+
+## Demo
+## https://simplesocialdjango.herokuapp.com/
