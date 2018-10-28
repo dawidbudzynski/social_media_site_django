@@ -1,7 +1,7 @@
 # Tech-Hub
 
 ## General info
-A web application made using Python 3, Django 1.11, Bootstrap and REST API and AJAX.
+A web application made using Python 3, Django 1.11, postgreSQL database, Bootstrap, REST API and AJAX.
 This project is simple social media site about technology. User can: create account, add groups and write posts.
 
 ## Main functions
