@@ -28,5 +28,7 @@ urlpatterns = [
     url(r"^accounts/", include("django.contrib.auth.urls")),
     url(r"^posts/", include("posts.urls", namespace="posts")),
     url(r"^groups/", include("groups.urls", namespace="groups")),
-    url(r"^tech_news/", include("tech_news.urls", namespace="tech_news"))
+    url(r"^tech_news/", include("tech_news.urls", namespace="tech_news")),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r"^rest_api/", include("rest_api.urls", namespace="rest_api"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

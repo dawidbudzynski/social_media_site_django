@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'accounts',
     'groups',
     'posts',
-    'tech_news'
+    'tech_news',
+    'rest_framework',
+    'rest_api'
 ]
 
 MIDDLEWARE = [
@@ -89,6 +91,14 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'simplesocial.wsgi.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.BasicAuthentication',
+    )
+}
 
 
 # Database
