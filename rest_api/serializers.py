@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name="rest_api:user-detail")
+    url = serializers.HyperlinkedIdentityField(view_name="rest_api:users-detail")
 
     class Meta:
         model = User

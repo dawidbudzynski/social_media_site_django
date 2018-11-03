@@ -141,3 +141,11 @@ img {
     height: 50px;
     width: auto;
 }
+
+#api-buttons-group{
+    text-align: center;
+}
+
+.api-button{
+    width: 33%;
+}

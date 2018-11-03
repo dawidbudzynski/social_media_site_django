@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.views.generic import TemplateView
 from groups.models import Group
 from posts.models import Post
 from rest_framework import viewsets
@@ -28,3 +29,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class RestApiMain(TemplateView):
+    template_name = 'rest_api_main.html'

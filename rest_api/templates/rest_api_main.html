@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <img class="news-img" src="{% static 'img/logo.png' %}" alt="'No image">
+            <h1 class="card-text">Select API</h1>
+        </div>
+        <div class="card-footer text-muted">
+            <h3 class="card-footer-text">Select API</h3>
+        </div>
+        <div class="card-body">
+            <div id="api-buttons-group">
+                <a type="button" class="btn btn-primary api-button" href="{% url 'rest_api:users-list' %}">Users</a>
+                <a type="button" class="btn btn-primary api-button" href="{% url 'rest_api:groups-list' %}">Groups</a>
+                <a type="button" class="btn btn-primary api-button" href="{% url 'rest_api:posts-list' %}">Posts</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

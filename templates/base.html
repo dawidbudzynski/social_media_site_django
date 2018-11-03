@@ -38,6 +38,8 @@
                                                 class="nav-link btn btn-primary">Post</a></li>
                         <li class="nav-item"><a href="{% url 'groups:all' %}"
                                                 class="nav-link btn btn-primary">Groups</a></li>
+                        <li class="nav-item"><a href="{% url 'rest_api:api-main' %}"
+                                                class="nav-link btn btn-primary">API</a></li>
                         <li class="nav-item"><a href="{% url 'accounts:user_details' %}"
                                                 class="nav-link btn btn-primary">User: {{ user.get_username }}</a></li>
                         <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link btn btn-primary">Log
