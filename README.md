@@ -14,6 +14,7 @@ Project is created using:
 * Python 3.5
 * Django 1.11
 * MySQL
+* Django REST framework
 * REST API
 * AJAX
 
