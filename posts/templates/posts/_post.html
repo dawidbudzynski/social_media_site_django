@@ -1,23 +1,29 @@
 {% load staticfiles %}
 <div id="news_field" class="card">
     <div class="card-body">
-        {% if post.image %}
-            <img class="news-img" src="{{ post.image.url }}" alt="'No image">
-        {% else %}
-            <img class="news-img" src="{% static 'img/logo.png' %}" alt="'No image">
-        {% endif %}
-        <div id="post-text">
-            <p class="card-text card-description">{{ post.message_html|safe }}</p>
+        <div class="row">
+            <div class="col col-md-4 post-img-info">
+                <div class="row post-img">
+                    {% if post.image %}
+                        <img class="news-img" src="{{ post.image.url }}" alt="'No image">
+                    {% else %}
+                        <img class="news-img" src="{% static 'img/logo.png' %}" alt="'No image">
+                    {% endif %}
+                </div>
+                <div class="row post-info">
+                    <h5><span class="username"><a href="{% url 'posts:for_user' username=post.user.username %}">
+                @{{ post.user.username }}</a></span>
+                        <time class="time"><a
+                                href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a>
+                        </time>
+                    </h5>
+                </div>
+            </div>
+            <div class="col col-md-6">
+                <p class="card-text">{{ post.message_html|safe }}</p>
+            </div>
         </div>
-        <div id="post-info">
-            <h5>
-            <span class="username"><a
-                    href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></span>
-                <time class="time"><a
-                        href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a>
-                </time>
-            </h5>
-        </div>
+
     </div>
     {% if user.is_authenticated and post.user == user and not hide_delete %}
         <div class="card-footer text-muted">

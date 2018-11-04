@@ -123,18 +123,16 @@ img {
     border: 1px solid #9b9acc;
 }
 
-#post-info {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    margin: 0 0 80px -250px;
+#post-counter {
+    text-align: center;
 }
 
-#post-counter {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    margin: 0 0 80px -130px;
+.post-img-info{
+    margin-left: 20px;
+}
+
+.post-img{
+    margin-bottom: 10px;
 }
 
 .logo-img {
