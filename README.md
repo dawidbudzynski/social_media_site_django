@@ -32,7 +32,7 @@ $ python manage.py runserver
 ```
 
 ## Demo
-## https://simplesocialdjango.herokuapp.com/
+## https://socialappdjango.herokuapp.com/
 
 ![alt text](https://raw.githubusercontent.com/dawidbudzynski/simplesocial_python_django/master/examples/example1.png)
 ![alt text](https://raw.githubusercontent.com/dawidbudzynski/simplesocial_python_django/master/examples/example2.png)
